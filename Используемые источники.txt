@@ -1,0 +1,2 @@
+https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf - библиотека Picamera2 документация, наверное)
+https://www.raspberrypi.com/documentation/computers/camera_software.html
