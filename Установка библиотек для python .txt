@@ -1,0 +1,5 @@
+Вроде imageAi новый не работает с чем-то там, поэтому нужно поставить версии
+Там возможны проблемы со scipy, поэтому выполняем следующие команды:
+sudo apt install libblas3 liblapack3 liblapack-dev libblas-dev
+sudo apt install gfortran
+pip install --extra-index-url https://antocuni.github.io/pypy-wheels/manylinux2010 scipy==1.8.0

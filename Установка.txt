@@ -1,0 +1,17 @@
+Установка и настройка raspberry
+https://www.youtube.com/watch?v=soIc2svmREs&t=1278s
+
+
+Установка opencv2
+https://robu.in/how-to-install-opencv-in-raspberry-pi/ - инструкция
+https://www.youtube.com/watch?v=PgTbIrn_u6o - тоже самое, но видео
+Потом нужно скопировать папку 
+
+
+Установка pyCharm
+В общем, есть проблема, что ему нужна java, а java на raspberry 11 и если скачать последнюю версию pycharm, то он напишет,
+что он был скомпилирован на более поздней версии и не запустится. Поэтому я взял версию 2022.1.4 по ссылке:
+https://download-cdn.jetbrains.com/python/pycharm-community-2022.1.4.tar.gz?_gl=1*10y2sm8*_ga*NzIwODY0MjIwLjE2Nzc2ODgyOTg.*_ga_9J976DJZ68*MTY3NzY5MjIxMC4yLjEuMTY3NzY5MjQ0MC42MC4wLjA.&_ga=2.199930094.1937025301.1677688298-720864220.1677688298
+Потом рапаковываем архив, ставим java 11 и в папке bin запускаем pychram.sh (после этого должно запуститься)
+Как создать ярлык: 
+https://askubuntu.com/questions/391439/how-can-i-set-up-pycharm-to-launch-from-the-launcher
