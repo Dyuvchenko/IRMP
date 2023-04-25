@@ -1,2 +1,7 @@
 https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf - библиотека Picamera2 документация, наверное)
 https://www.raspberrypi.com/documentation/computers/camera_software.html
+https://itproger.com/course/bootstrap - уроки по bootstrap
+https://getbootstrap.com/ - bootstrap
+https://flask.palletsprojects.com/en/latest/quickstart/ - flask
+https://flask-login.readthedocs.io/en/latest/index.html#installation - flak-login
+https://proproprogs.ru/python - уроки по flask, python, jinja
