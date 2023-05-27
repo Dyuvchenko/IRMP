@@ -1,0 +1,56 @@
+{% include 'base/header.html' %}
+{% include 'patrol_header.html' %}
+
+<div class="container text-center">
+    <h3 class="list-group-item-heading">Список доверенных пользователей</h3>
+    <div class="list-group">
+        {% for user in users_recognition %}
+        <li class="list-group-item" id="li_delete_people_patrolling={{user}}">
+            <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-user"></span> {{user}}
+                <button style="margin-left: 15px" id="delete_people_patrolling={{user}}" type="button"
+                        class="btn btn-danger btn-delete-people-recognizer">Удалить пользователя
+                </button>
+            </h4>
+        </li>
+        {% endfor %}
+    </div>
+    <button id="add_new_people_patrol" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+            data-target="#add_new_people_patrolling">Добавить нового пользователя
+    </button>
+</div>
+
+<!--Форма добавления нового пользователя-->
+<div id="add_new_people_patrolling" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Регистрация нового пользователя</h4>
+            </div>
+            <div style="margin:15px">
+                <div> Введите ФИО нового человека. На Английском!</div>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input id="input_name" type="text" class="form-control">
+                </div>
+                <div> Необходимо сделать 10 фотографий человека.</div>
+                <div id="take_photo_count"> Осталось : 10</div>
+                <div>
+                    <img id="patrol_video_feed" src="{{ url_for('video_feed') }}" class="img-responsive">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button id="take_photo" type="button" class="btn btn-primary">
+                    Сделать фото
+                </button>
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('patrol.listeners_patrolling') }}" crossorigin="anonymous"></script>
+
+{% include 'base/footer.html' %}

@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-patrolling">
+                <span class="sr-only">Навигация</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('patrol.patrol_index') }}">Модуль навигации</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-patrolling">
+            <ul class="nav navbar-nav">
+                <li class="nav-link"><a href="{{ url_for('patrol.patrol_index') }}">О модуле</a></li>
+                <li class="nav-link"><a href="{{ url_for('patrol.patrol_people') }}">Настройки распознавания личностей</a></li>
+                <li class="nav-link"><a href="index">Настройки распознавания объектов</a></li>
+                <li class="nav-link"><a href="index">Патрулирование территории по границам</a></li>
+                <li class="nav-link"><a href="index">Патрулирование территории по маршруту</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

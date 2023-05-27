@@ -1,0 +1,112 @@
+{% if user_is_authenticated %}
+<li><a data-toggle="modal" data-target="#profile">Профиль</a></li>
+{% else %}
+<li>
+    <button class="btn btn-info" data-toggle="modal" data-target="#login"
+            style="margin: 7px;">Войти
+    </button>
+    <button class="btn btn-info" data-toggle="modal" data-target="#registration"
+            style="margin: 7px;">Зарегистрироваться
+    </button>
+</li>
+{% endif %}
+
+<!--Форма входа-->
+<div id="login" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Вход</h4>
+            </div>
+            <form id="formLogin" role="form" style="margin: 15px" class="text-center" method="post">
+                <div class="alert alert-danger alert-dismissible" style="display: none" id="loginInError">
+                    Ошибка входа)
+                </div>
+                <div class="form-group">
+                    <label for="userNameLogin"><span class="glyphicon glyphicon-user"></span> Логин</label>
+                    <input type="text" class="form-control" id="userNameLogin" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="psw1Login"><span class="glyphicon glyphicon-eye-open"></span> Пароль</label>
+                    <input type="password" class="form-control" id="psw1Login" placeholder="Введите пароль" name="psw">
+                </div>
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>
+                    Войти
+                </button>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Форма регистрации-->
+<div id="registration" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Регистрация</h4>
+            </div>
+            <form id="formRegistration" role="form" style="margin: 15px" class="text-center" method="post">
+                <div class="alert alert-danger alert-dismissible" style="display: none" id="registrationError">
+                    Ошибка регистрации)
+                </div>
+                <div class="form-group">
+                    <label for="userNameRegistration"><span class="glyphicon glyphicon-user"></span> Логин</label>
+                    <input type="text" class="form-control" id="userNameRegistration" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="psw1Registration"><span class="glyphicon glyphicon-eye-open"></span> Пароль</label>
+                    <input type="password" class="form-control" id="psw1Registration" placeholder="Введите пароль"
+                           name="psw">
+                </div>
+                <div class="form-group">
+                    <label for="psw2Registration"><span class="glyphicon glyphicon-eye-open"></span> Повторите Пароль</label>
+                    <input type="password" class="form-control" id="psw2Registration" placeholder="Введите пароль ещё раз"
+                           name="psw">
+                </div>
+                <div class="form-group">
+                    <label for="IRMPPIN"><span class="glyphicon glyphicon-exclamation-sign"></span> Введите уникальный
+                        PIN платформы</label>
+                    <input type="text" class="form-control" id="IRMPPIN" placeholder="Введите уникальный PIN платформы"
+                           name="pin">
+                    <div class="font-weight-light">Уникальный PIN платформы был выдан при покупке</div>
+                </div>
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>
+                    Зарегистрироваться
+                </button>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Профиль-->
+<div id="profile" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Профиль</h4>
+            </div>
+            <div id="userInfoData" style="margin: 15px">
+                    Информация о профиле пользователя
+            </div>
+            <div style="margin: 15px">
+                    Логин пользователя : {{ user_name }}
+            </div>
+            <div class="modal-footer">
+                <button id="logout" class="btn btn-warning" data-dismiss="modal">Выйти из системы</button>
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть окно</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{{ url_for ('static', filename = 'js/login_registration_profile.js')  }}"></script>

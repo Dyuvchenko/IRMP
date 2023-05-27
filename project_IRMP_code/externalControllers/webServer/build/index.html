@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ИРМП - интеллектуальная роботизированная модульная платформа</title>
+
+    <link href="/static/ico/favicon.ico" rel='icon'>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.min.css" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Навигация</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">ИРМП</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="nav-link"><a href="index">О проекте</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Управление <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Действие</a></li>
+                        <li><a href="#">Другое действие</a></li>
+                        <li><a href="#">Что-то еще</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Отдельная ссылка</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Еще одна отдельная ссылка</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Настройки</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                
+<li>
+    <button class="btn btn-info" data-toggle="modal" data-target="#login"
+            style="margin: 7px;">Войти
+    </button>
+    <button class="btn btn-info" data-toggle="modal" data-target="#registration"
+            style="margin: 7px;">Зарегистрироваться
+    </button>
+</li>
+
+
+<!--Форма входа-->
+<div id="login" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Вход</h4>
+            </div>
+            <form id="formLogin" role="form" style="margin: 15px" class="text-center" method="post">
+                <div class="alert alert-danger alert-dismissible" style="display: none" id="loginInError">
+                    Ошибка входа)
+                </div>
+                <div class="form-group">
+                    <label for="userNameLogin"><span class="glyphicon glyphicon-user"></span> Логин</label>
+                    <input type="text" class="form-control" id="userNameLogin" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="psw1Login"><span class="glyphicon glyphicon-eye-open"></span> Пароль</label>
+                    <input type="password" class="form-control" id="psw1Login" placeholder="Введите пароль" name="psw">
+                </div>
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>
+                    Войти
+                </button>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Форма регистрации-->
+<div id="registration" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Регистрация</h4>
+            </div>
+            <form id="formRegistration" role="form" style="margin: 15px" class="text-center" method="post">
+                <div class="alert alert-danger alert-dismissible" style="display: none" id="registrationError">
+                    Ошибка регистрации)
+                </div>
+                <div class="form-group">
+                    <label for="userNameRegistration"><span class="glyphicon glyphicon-user"></span> Логин</label>
+                    <input type="text" class="form-control" id="userNameRegistration" placeholder="Введите логин">
+                </div>
+                <div class="form-group">
+                    <label for="psw1Registration"><span class="glyphicon glyphicon-eye-open"></span> Пароль</label>
+                    <input type="password" class="form-control" id="psw1Registration" placeholder="Введите пароль"
+                           name="psw">
+                </div>
+                <div class="form-group">
+                    <label for="psw2Registration"><span class="glyphicon glyphicon-eye-open"></span> Повторите Пароль</label>
+                    <input type="password" class="form-control" id="psw2Registration" placeholder="Введите пароль ещё раз"
+                           name="psw">
+                </div>
+                <div class="form-group">
+                    <label for="IRMPPIN"><span class="glyphicon glyphicon-exclamation-sign"></span> Введите уникальный
+                        PIN платформы</label>
+                    <input type="text" class="form-control" id="IRMPPIN" placeholder="Введите уникальный PIN платформы"
+                           name="pin">
+                    <div class="font-weight-light">Уникальный PIN платформы был выдан при покупке</div>
+                </div>
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>
+                    Зарегистрироваться
+                </button>
+            </form>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Профиль-->
+<div id="profile" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title">Профиль</h4>
+            </div>
+            <div id="userInfoData" style="margin: 15px">
+                    Информация о профиле пользователя
+            </div>
+            <div class="modal-footer">
+                <button id="logout" class="btn btn-warning" data-dismiss="modal">Выйти из системы</button>
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть окно</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/login_registration_profile.js"></script>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="d-flex align-items-center justify-content-center vh-100">
+    Главная информация
+</div>
+
+<div>Нам пришёл flash</div>
+
+<br>
+<footer class="bg-dark text-center text-while">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+        <p class="text-center">ИРМП - интеллектуальная роботизированная модульная платформа.
+        <p class="text-center">Разработчик <a class="text-reset fw-bold" href="#">: Ювченко Давид</a>
+            Телефон для связи (поддержать, Сбер, ВТБ): * *** *** ** ** </p>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="/static/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+<!-- Подключаем файл для создания enum -->
+<script src="/static/js/enum.js" crossorigin="anonymous"></script>
+<!-- Подключаем класс, который будет служить базовым отправителем запросов, и если что будет красиво выдавать ошибки пользователю -->
+<script src="/static/js/ServerConnection.js" crossorigin="anonymous"></script>
+
+<!-- Подключаем вывод сообщений пользователю -->
+<div id="userInfo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title" id="userInfoModalTitle">Информация</h4>
+            </div>
+            <div class="alert" id="userMessageInfoData" style="margin: 15px">
+                    Информация
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/UserInfo.js"></script>
+</body>
+</html>

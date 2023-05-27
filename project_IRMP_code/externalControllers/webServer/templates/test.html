@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap уроки</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.js">
+</script>
+<script> 'cf1828b394db9b5dc60cf4167ecbc8af04e04f197483e95289e9c34e0a798b04'
+   var enbtn = document.getElementById("encrbtn");
+   var rawdata = document.getElementById("rawdata");
+   var password = document.getElementById("password");
+   var display1 = document.getElementById("display1");
+   var endata = document.getElementById("endata");
+   var password2 = document.getElementById("password2");
+   var display2 = document.getElementById("display2");
+   var debtn = document.getElementById("debtn");
+</script>
+
+Sensitive Data <input type="text" id="rawdata"/>
+Password       <input type="text" id="password"/>
+Encrypted data:: <span id="display1"></span><br/>
+<button type="button" id="encrbtn">Encrypt</button>
+
+<script>
+   enbtn.addEventListener("click",function(e){
+   var ciphertext = CryptoJS.AES.encrypt(rawdata.value, password.value);
+   endata.value =  ciphertext.toString();
+   display1.textContent = ciphertext.toString();
+   })
+</script>
+
+Encrypted String<input type="text" id="endata"/>
+Password       <input type="text" id="password2"/>
+Decrypted data:: <span id="display2"></span><br/>
+<button type="button" id="debtn">Decrypt</button>
+<script>
+   debtn.addEventListener("click",function(e){
+
+   if(password.value != password2.value){
+   alert('password must same as on encrypted');
+   return false;
+   }
+   var Normaltext = CryptoJS.AES.decrypt(endata.value, password2.value);
+   display2.textContent = Normaltext.toString(CryptoJS.enc.Utf8);
+   });
+
+</script>
+
+</body>
+</html>

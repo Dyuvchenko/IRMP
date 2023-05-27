@@ -1,0 +1,18 @@
+<div id="userInfo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" title="Закрыть">x</button>
+                <h4 class="modal-title" id="userInfoModalTitle">Информация</h4>
+            </div>
+            <div class="alert" id="userMessageInfoData" style="margin: 15px">
+                    Информация
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for ('static', filename = 'js/UserInfo.js')  }}"></script>

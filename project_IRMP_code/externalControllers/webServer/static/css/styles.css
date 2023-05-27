@@ -1,0 +1,58 @@
+html, body {
+    font-family: 'Arial';
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+ul.main-menu {
+    list-style: none;
+    background: #3F4137;
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+    color: #fdc073;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+ul.main-menu li {
+    float: left;
+    margin: 18px 40px 0 50px;
+    margin-bottom: 15px;
+}
+
+ul.main-menu li.last {
+    float: right;
+}
+
+ul.main-menu li a {
+    color: #fdc073;
+    text-decoration: none;
+}
+
+ul.main-menu li a:hover {
+    color: #FDA83D;
+}
+
+h1.IRMP {
+    text-align: center;
+}
+
+p {
+    margin: 10px;
+}
+.flash {
+    padding: 10px;
+    margin: 10px;
+}
+
+.flash.success {
+    border:  1px solid #21DB56;
+    background: #AEFFC5;
+}
+
+.flash.error {
+    border: 1px solid #FF4343;
+    background: #FF9C9C;
+}

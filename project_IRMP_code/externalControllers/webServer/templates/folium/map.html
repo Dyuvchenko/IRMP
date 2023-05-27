@@ -1,0 +1,14 @@
+{% include 'base/header.html' %}
+
+<div style="margin: 15px">
+    {{ iframe|safe }}
+</div>
+
+<div style="margin: 15px">
+    <div>Информация о карте</div>
+    <button id="add_route_btn" type="button" class="btn btn-primary">Создать новый маршрут</button>
+</div>
+
+
+{% include 'folium/map_scripts.html' %}
+{% include 'base/footer.html' %}

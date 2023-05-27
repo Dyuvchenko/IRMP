@@ -1,0 +1,8 @@
+Открываем Python Console
+и выполняем:
+
+from externalControllers.webServer.main import app
+from db.DataBaseHelper import DataBaseHelper
+DataBaseHelper.create_db(app)
+
+Для просмотра можно использовать DB Browser for SQLite
