@@ -70,6 +70,8 @@ if __name__ == "__main__":
 
     ProjectConsts.Core = Core()
 
+    #написать запуск модуля распознования команд
+
     if ProjectConsts.ConfigDict.get("launchMode") == "debug":
         launch_server_debug()
     else:
