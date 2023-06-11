@@ -1,1 +1,91 @@
-<mxfile host="app.diagrams.net" modified="2023-03-05T20:18:50.971Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 YaBrowser/23.1.3.949 Yowser/2.5 Safari/537.36" etag="WaDzzuVQIzKNS5c6jkkZ" version="21.0.2" type="device"><diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">7Vvfk6I4EP5reLypQEDwUcW5q7q9qqm1an+9UZIV7pBYGFfdv34DCSGB4DjKiMv5YiVNEsjXXzrdSWvA2frwZxZson9wiBLDAuHBgL5hWR606G8uODKB7Y6ZYJXFIROZlWAR/0RcCLh0F4doqzQkGCck3qjCJU5TtCSKLMgyvFebfceJ+tZNsEINwWIZJE3p5zgkEZ+W5Vbyv1C8iso3myM+v3VQNuYz2UZBiPeSCM4NOMswJqy0PsxQkmNX4sL6Pbc8FR+WoZSc0+Hw8vfHxbcvyQfPXUS7F//Tz+3+D66dH0Gy4xM2fNPwng0fGFO7KIOiPOeTIMcSmQzv0hDlgwMDTvdRTNBiEyzzp3tKBSqLyDqhNZMW+WtQRtCh9ftNgQplE8JrRLIjbcI7QI8DyZlkuby+r/RilmBHkk5GXBZwKqzE0BVatMABewN4UAMeMMYzDlgFISzK06JMX8UQLRpP/eLXKR55qoT+whJ7II3zLKlFHmoqdWSDeFyZfatOrAGuOgf0rbpyDhIoKKQLn1dxRiK8wmmQzCvpVIWtavMB4w0H619EyJFbsWBHsAolOsTkS979yeG1r3ywvOwf5MqxrKR0vlKnvPq1HC+vVN2KWtmPzS+f1GmlUQzwLluiE2A53O4G2QqR14xJkwQZSgIS/1C/o3ONOlctxonUbCatLJ937HsF1Y2fqPe2gkaX4y1bL1o2S6smOroS9nPJwgGdbQOKpawM4VwaHPSuQAfemwn0OlgwQpn0l3kO096RFq4jR9rsfamYph7q0x6Ax+Uc8BN6KRr3DbszqsHeu3tmtmwJw4LdvTu2t+wMw4K9th+b495hd/8PsI9V2K3ed1FTs402Ios0nORHEbS2TILtNl6qwKgoXhIkGN05+zyofdXZd/SKkhThaPRQys6OCfgbXnBMJ1K5w+MWd7gcgk2T95IPRWoD2XZtIFgbiOHQGKjgipj2FXEouAf6iBhTBJU3jjBHD9LdknSaU7+zSLelH0bewsWLeCUY3If5s85kovdgYhdMtG/NRHAJE02ZiU+Wc29kZC73g43XsvEmASNQC7Z0kMKOUFxp2MmdON4jUHO8zb4db0sT71zpOWl3K3DBbmXezECcezTfq+NUj9qg85saCNi9t34R585n0KvEgH0Sw247FP/tiKE54e2IGKAnYvTqUgyHGG8LtVKcorcH9zfbboYZfjfI9d6caMkbsdVrS+EPiqwP5nIWl2yKy/na5bX+Xo46g0Tl2pZk+D80wwnOKi5+j5OkJgqSeJXmZowSCFH5NHct42WQTPiDdRyGRcaEzjFVGW1c75vatQs/R+ObjjS8rJuC7vKCNFEtneyEKVVWsxwyeEq2ld+89BaKH5eKl+/My/tZX9yf1wZhfBIZQnK2kLjVdaU3PqvfU5BSiVkc/jEKX8UbvfJTh0q7+j2zbTVpd+N8NH38+uDdoHjn2HfHu5YbX1vlUdv2NVePTpyGYn2FC5VcnKFYEu8mUkoK2znhcLkAa36yBZwGF8YjjUvmvBcVWm6hz3RR5GU+VRO8LIk6NfsD1KTZZn5YS0YzN0GDJYfZEvvIhsI+4bB3z46WnLPr2eG1ZBKew47Th7aCO+VuOVi+2LVUIrqLPDXNiacjzLuZk/EjVOrUd6gl6UGN79BRqESr1X9bWOhc/UEIzn8B</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2023-05-16T18:30:08.031Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 YaBrowser/23.3.3.719 Yowser/2.5 Safari/537.36" etag="Z2cOjMaQwG1jypYAP4lc" version="21.3.2" type="device">
+  <diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">
+    <mxGraphModel dx="1155" dy="659" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-2" value="ядро" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-3" value="Модули для внешнего управления" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="372" y="501" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="xPKRSZXlL87ShuPDVzsw-5" target="xPKRSZXlL87ShuPDVzsw-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-5" value="Модуль команд" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="380" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-8" value="Модуль карты" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-11" value="Внешние модули" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="560" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-15" value="Внешние модули" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="570" y="180" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-16" value="Внешние модули" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-17" value="Внешние модули" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="590" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-18" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" parent="1" source="bnROQ4cpaKVdDIO9CQ69-1" target="xPKRSZXlL87ShuPDVzsw-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="276" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-20" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="xPKRSZXlL87ShuPDVzsw-5" target="bnROQ4cpaKVdDIO9CQ69-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="380" as="sourcePoint" />
+            <mxPoint x="600" y="459" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-22" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" parent="1" source="xPKRSZXlL87ShuPDVzsw-2" target="xPKRSZXlL87ShuPDVzsw-8" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="380" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-24" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="xPKRSZXlL87ShuPDVzsw-2" target="xPKRSZXlL87ShuPDVzsw-16" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="380" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-25" value="Внешние модули и датчики" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="600" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-27" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="xPKRSZXlL87ShuPDVzsw-25" target="xPKRSZXlL87ShuPDVzsw-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="350" as="sourcePoint" />
+            <mxPoint x="440" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-33" value="Доступные команды" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="510" y="451" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-34" value="Сформированый пользователем запрос действий" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="248" y="445" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-36" value="Данные о местности вокруг" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="330" y="205" width="96" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-37" value="Команды для выполнения ядром" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="310" y="330" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-38" value="Команды для исполнения модулями" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="470" y="212.5" width="80" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="xPKRSZXlL87ShuPDVzsw-39" value="Доступные команды" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="560" y="320" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="bnROQ4cpaKVdDIO9CQ69-1" value="Модули для внешнего управления" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="508" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
