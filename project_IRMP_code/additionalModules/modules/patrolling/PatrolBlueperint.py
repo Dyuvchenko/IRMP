@@ -7,6 +7,7 @@ from flask import Blueprint, url_for, Response, render_template, request
 from flask.json import jsonify
 
 import ProjectConsts
+import additionalModules.modules.patrolling.main
 from additionalModules.modules.patrolling.train_model import train_model
 from externalControllers.webServer.FlaskHelper import FlaskHelper
 from externalControllers.webServer.models.Messages.MessageType import MessageType
@@ -100,5 +101,12 @@ def get_users():
     return os.listdir(modulePath + "dataset\\")
 
 
+def get_module_name():
+    return "Патрулирование"
+
+
+def get_module_url_path():
+    return name + "." + patrol_index.__name__
+
+
 flaskHelper.register_blueprint(patrol, name)
-ProjectConsts.ModulesNamesBaseMethodsForUrl["Патрулирование"] = name + "." + patrol_index.__name__

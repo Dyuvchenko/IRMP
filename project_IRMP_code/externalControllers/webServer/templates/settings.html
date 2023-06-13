@@ -1,0 +1,51 @@
+{% include 'base/header.html' %}
+<div class="container">
+    <h3> Работа с модулями </h3>
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Имя модуля</th>
+            <!--            <th>Путь к модулю</th>-->
+            <th>Поддержка платформой</th>
+            <th>Статус</th>
+            <th>Ошибки при инициализации</th>
+            <th>Отключить модуль</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for name_module, module_settings in modules.items() %}
+        <tr>
+            <td>{{ module_settings.name }}</td>
+            <!--            <td>{{ module_settings.path }}</td>-->
+            {% if module_settings.module_is_supported %}
+            <td>Поддерживается</td>
+            {% else %}
+            <td>Не поддерживается</td>
+            {% endif %}
+            {% if module_settings.is_disabled %}
+            <td>Отключён</td>
+            {% else %}
+            <td>Активирован</td>
+            {% endif %}
+            {% if module_settings.error_init_module %}
+            <td>Ошибки при инициализации</td>
+            {% else %}
+            <td>Нет ошибок</td>
+            {% endif %}
+            {% if module_settings.is_disabled %}
+            <td>
+                <button id="activate_module" name="{{module_settings.path}}" type="button" class="btn btn-info">Активировать модуль</button>
+            </td>
+            {% else %}
+            <td>
+                <button id="disable_module" name="{{module_settings.path}}" type="button" class="btn btn-warning">Отключить модуль</button>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+{% include 'base/footer.html' %}

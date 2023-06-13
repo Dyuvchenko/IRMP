@@ -7,6 +7,7 @@ import ProjectConsts
 from map.MapController import MapController
 from instruction.InstructionController import InstructionController
 from datetime import datetime
+from core.ModuleSettings import ModuleSettings
 
 """Центральное ядро, через которое проходят все команды (по идее)"""
 
@@ -18,6 +19,8 @@ class Core:
     base_core_thread = None
 
     __disable_modules__ = set()
+
+    __modules_settings__ = dict()
 
     functionsUpdateModule = dict()
 
@@ -32,13 +35,13 @@ class Core:
         self.__config_disable_modules__()
         self.__init_modules()
         self.__map_controller__ = MapController("58.102712, 38.621715")  # TODO получение данных с arduino!
-        self._logger_.info("Инициализации Core завершена")
 
         base_core_thread = threading.Thread(target=self.main_process)
         base_core_thread.start()
 
-        update_core_thread = threading.Thread(target=self.update_process())
+        update_core_thread = threading.Thread(target=self.update_process)
         update_core_thread.start()
+        self._logger_.info("Инициализации Core завершена")
 
     def __config_disable_modules__(self):
         self._logger_.info("Чтение файла с информацией об отключённых модулях...")
@@ -52,9 +55,25 @@ class Core:
         # Получаем все файлы с нужным расширением и в нужном месте
         main_py_modules = glob.glob("additionalModules/**/**/main.py")
         self._logger_.info("Запуск модулей:" + str(main_py_modules))
+        module_settings: ModuleSettings = None  # сокращённое имя модуля (нормальное имя)
         for main_modul in main_py_modules:
-            name_module = main_modul.replace("\\", ".").replace(".py", "")
+            name_module = main_modul.replace("\\", ".") \
+                .replace(".py", "")  # ну даже не имя модуля, а скорее путь к main файлу
+            # получаем сокращённое имя модуля из main файлов модуля
+            try:
+                module_settings = __import__(name_module, globals(), locals(), ['update'], 0).get_module_settings()
+                module_settings.path = name_module
+                # добавляем модуль в список модулей
+                self.__modules_settings__[module_settings.name] = module_settings
+            except Exception:
+                self._logger_.error("Ошибка получения настроек модуля:" + name_module)
+                self._logger_.error(name_module + " не будет работать!")
+                module_settings.error_init_module = True
+                module_settings.is_disabled = True
+                continue
+
             if self.__disable_modules__.__contains__(name_module):
+                module_settings.is_disabled = True
                 continue
             try:
                 # from additionalModules.modules.patrolling.main import update
@@ -67,6 +86,8 @@ class Core:
             except ImportError:
                 self._logger_.error("Ошибка инициализации модуля:" + name_module)
                 self._logger_.error(name_module + " не будет работать!")
+                module_settings.error_init_module = True
+                module_settings.is_disabled = True
             # exec(open(main_modul).read())
         # print(glob.glob("../additionalModules/modules/main.py"))
         self._logger_.info("Завершена инициализация внешних модулей")
@@ -120,6 +141,7 @@ class Core:
             if self.__disable_modules__.__contains__(name_module):
                 continue
             try:
+                self._logger_.info("Обновление модуля: " + name_module)
                 functionUpdate(ProjectConsts.emergency_stop)
             except Exception:
                 self._logger_.error("Ошибка при выполнении update() в модуле:" + name_module)
@@ -128,3 +150,9 @@ class Core:
     @staticmethod
     def time_now_in_second():
         return datetime.now().time().second + datetime.now().time().minute * 60 + datetime.now().time().hour * 60 * 60
+
+    def get_modules_settings(self):
+        return self.__modules_settings__
+
+    def get_disable_modules(self):
+        return self.__disable_modules__

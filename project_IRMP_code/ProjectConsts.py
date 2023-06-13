@@ -1,5 +1,5 @@
 import os
-from core import Core
+from core import Core as Core2
 from sqlalchemy.engine.base import Engine
 from core.cameras.camController import CamerasController
 from instruction import InstructionController
@@ -19,7 +19,7 @@ InitConfigDict = False
 
 DataBaseEngine: Engine = None
 
-Core: Core = None
+Core: Core2 = None
 
 InstructionController: InstructionController = None
 

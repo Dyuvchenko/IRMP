@@ -161,6 +161,69 @@ def test():
     return render_template("test.html")
 
 
+@app.route("/settings", methods=["GET"])
+def settings():
+    return base_render_template(
+        "settings.html",
+        modules=ProjectConsts.Core.get_modules_settings()
+    )
+
+
+@app.route("/activate_module", methods=["POST"])
+def activate_module():
+    module_path = request.form['module_path']
+    response_data = {}
+    for name_module, module_settings in ProjectConsts.Core.get_modules_settings().items():
+        if module_settings.path == module_path:
+            module_settings.is_disabled = False
+            response_data['success'] = True
+
+            # читаем файл и записываем новый, обновлённый конфиг файл
+            update_config_disable_modules_file(activate_module_path=module_path, disable_module_path=None)
+            # записываем обновлённые отключённые модули
+
+            UserMessage("Активация модуля", MessageType.success, "Модуль '" + name_module + "' успешно активирован") \
+                .add_from_response_data(response_data)
+            break
+    return jsonify(response_data)
+
+
+@app.route("/disable_module", methods=["POST"])
+def disable_module():
+    module_path = request.form['module_path']
+    response_data = {}
+    for name_module, module_settings in ProjectConsts.Core.get_modules_settings().items():
+        if module_settings.path == module_path:
+            module_settings.is_disabled = True
+            response_data['success'] = True
+
+            # читаем файл и записываем новый, обновлённый конфиг файл
+            update_config_disable_modules_file(activate_module_path=None, disable_module_path=module_path)
+            # записываем обновлённые отключённые модули
+
+            UserMessage("Деактивация модуля", MessageType.success,
+                        "Модуль '" + name_module + "' успешно деактивирован").add_from_response_data(response_data)
+            break
+    return jsonify(response_data)
+
+
+def update_config_disable_modules_file(activate_module_path, disable_module_path):
+    disable_modules = set()
+    with open("disable_modules.robo", "r") as configFile:  # открыть файл из рабочей директории в режиме чтения
+        for line_setting in configFile.readlines():
+            if line_setting == activate_module_path:
+                continue
+            else:
+                disable_modules.add(line_setting)
+    # if activate_module_path:
+    if disable_module_path:
+        disable_modules.add(disable_module_path)
+
+    with open("disable_modules.robo", "w") as configFile:
+        for path_module in disable_modules:
+            configFile.write(path_module)
+
+
 @app.route("/map_info", methods=["GET"])
 def folium_map_info():
     f_map = FoliumMapHelper.create_folium_map()
@@ -243,9 +306,13 @@ def unauthorized(error):
     return base_render_template("errors/page401.html"), 401
 
 
+# def launch_server_debug():
+#     logger.warning("Начало запуска web сервера в режиме debug")
+#     app.run(host='127.0.0.1', port=8000, debug=True)
+
 def launch_server_debug():
     logger.warning("Начало запуска web сервера в режиме debug")
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(host='127.0.0.1', port=8000, debug=False)
 
 
 def launch_server_production():

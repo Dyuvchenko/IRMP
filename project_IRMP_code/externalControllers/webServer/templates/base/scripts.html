@@ -12,5 +12,9 @@
 <!-- Подключаем класс, который будет помогать работать с "URL" -->
 <script src="{{ url_for('static', filename='js/URL_Helper.js') }}" crossorigin="anonymous"></script>
 
+<!-- Подключаем js для работы с вкладкой настроек -->
+<script src="{{ url_for('static', filename='js/SettingsController.js') }}" crossorigin="anonymous"></script>
+
+
 <!-- Подключаем вывод сообщений пользователю -->
 {% include 'base/baseUserInfo.html' %}
