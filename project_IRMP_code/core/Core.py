@@ -13,33 +13,42 @@ from core.ModuleSettings import ModuleSettings
 
 
 class Core:
+    """ Контроллер карты"""
     __map_controller__: MapController = None
+
+    """Логгер"""
     _logger_ = logging.getLogger()
 
+    """ Основной поток core"""
     base_core_thread = None
 
+    """Отключённые модули"""
     __disable_modules__ = set()
 
+    """Мапа настроек модулей"""
     __modules_settings__ = dict()
 
+    """Функции обновления модулей. Ключ - имя модуля, значение - функция"""
     functionsUpdateModule = dict()
 
+    """Контроллер инструкций"""
     instructionController: InstructionController = None
 
+    """Текущая инструкция на исполнении"""
     __current_instruction__ = None
 
     def __init__(self):
         self._logger_.info("Стар инициализации Core")
         self.instructionController = InstructionController()
         ProjectConsts.InstructionController = self.instructionController
-        self.__config_disable_modules__()
-        self.__init_modules()
-        self.__map_controller__ = MapController("58.102712, 38.621715")  # TODO получение данных с arduino!
+        self.__config_disable_modules__()  # настраиваем отключённые модули
+        self.__init_modules()  # инициализируем внешние модули
+        self.__map_controller__ = MapController("58.102712, 38.621715")
 
-        base_core_thread = threading.Thread(target=self.main_process)
+        base_core_thread = threading.Thread(target=self.main_process)  # запускаем основной процесс core
         base_core_thread.start()
 
-        update_core_thread = threading.Thread(target=self.update_process)
+        update_core_thread = threading.Thread(target=self.update_process)  # запускаем процесс обновления модулей
         update_core_thread.start()
         self._logger_.info("Инициализации Core завершена")
 
@@ -72,11 +81,11 @@ class Core:
                 module_settings.is_disabled = True
                 continue
 
+            # если модуль есть в списке отключённых, тогда не инициализируем его
             if self.__disable_modules__.__contains__(name_module):
                 module_settings.is_disabled = True
                 continue
             try:
-                # from additionalModules.modules.patrolling.main import update
                 __import__(name_module)  # первичный импорт main файлов модулей
 
                 # импортируем функции update из main файлов модулей
@@ -88,26 +97,27 @@ class Core:
                 self._logger_.error(name_module + " не будет работать!")
                 module_settings.error_init_module = True
                 module_settings.is_disabled = True
-            # exec(open(main_modul).read())
-        # print(glob.glob("../additionalModules/modules/main.py"))
+
         self._logger_.info("Завершена инициализация внешних модулей")
 
     def main_process(self):
         logging.getLogger().info("main_process в core запущен")
         while True:
-            if not ProjectConsts.emergency_stop:
+            if not ProjectConsts.emergency_stop: # пока не установлен флаг аварийной остановки
                 self.processing_current_instructions()
 
-            if ProjectConsts.stop_system:
+            if ProjectConsts.stop_system: # пока не установлен флаг остановки системы
                 break
         logging.getLogger().info("main_process в core завершил свою работу")
 
+    # выполнение текущей инструкции
     def processing_current_instructions(self):
         self.__current_instruction__ = self.instructionController.get_current_instruction_or_none()
-        if self.__current_instruction__:
+        if self.__current_instruction__: # если есть инструкция
             self.__current_instruction__()
             self.__current_instruction__ = None
 
+    # процесс обновления модулей
     def update_process(self):
         logging.getLogger().info("update_process в core запущен")
         multiplier = None
@@ -126,7 +136,7 @@ class Core:
         time_pause = int(ProjectConsts.ConfigDict["update_time"]) * multiplier
         while True:
             time_now = Core.time_now_in_second()
-            if time_now - time_pause > update_start_time:
+            if time_now - time_pause > update_start_time: # запускаем обновление по таймеру
                 update_start_time = time_now
                 self._logger_.info("Запущено обновление модулей")
                 self.update_module()
@@ -136,6 +146,7 @@ class Core:
                 break
         logging.getLogger().info("update_process в core завершил свою работу")
 
+    # обновление модулей
     def update_module(self):
         for name_module, functionUpdate in self.functionsUpdateModule.items():
             if self.__disable_modules__.__contains__(name_module):
@@ -147,12 +158,15 @@ class Core:
                 self._logger_.error("Ошибка при выполнении update() в модуле:" + name_module)
                 self._logger_.error(traceback.format_exc())
 
+    """Получаем текущее время с переводом в секунды"""
     @staticmethod
     def time_now_in_second():
         return datetime.now().time().second + datetime.now().time().minute * 60 + datetime.now().time().hour * 60 * 60
 
+    """Получить настройки модулей"""
     def get_modules_settings(self):
         return self.__modules_settings__
 
+    """Получить отключённые модули"""
     def get_disable_modules(self):
         return self.__disable_modules__
