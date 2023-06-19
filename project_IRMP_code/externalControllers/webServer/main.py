@@ -182,7 +182,10 @@ def activate_module():
             update_config_disable_modules_file(activate_module_path=module_path, disable_module_path=None)
             # записываем обновлённые отключённые модули
 
-            UserMessage("Активация модуля", MessageType.success, "Модуль '" + name_module + "' успешно активирован") \
+            UserMessage("Активация модуля", MessageType.success,
+                        "Модуль '" + name_module +
+                        "' успешно активирован, пожалуйста подождите пока изменения вступят в силу."
+                        " Как только это произойдёт, сайт автоматически обновится.") \
                 .add_from_response_data(response_data)
             break
     return jsonify(response_data)
@@ -202,7 +205,10 @@ def disable_module():
             # записываем обновлённые отключённые модули
 
             UserMessage("Деактивация модуля", MessageType.success,
-                        "Модуль '" + name_module + "' успешно деактивирован").add_from_response_data(response_data)
+                        "Модуль '" + name_module + "' успешно деактивирован. "
+                                                   "Пожалуйста подождите пока изменения вступят в силу."
+                                                   " Как только это произойдёт, сайт автоматически обновится.")\
+                .add_from_response_data(response_data)
             break
     return jsonify(response_data)
 

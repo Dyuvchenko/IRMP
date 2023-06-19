@@ -18,6 +18,7 @@ class DataBaseLauncher:
         logging.getLogger().info("Генерация метаданных завершена.")
         logging.getLogger().info("База данных инициализирована.")
 
+    """создание ядра"""
     @staticmethod
     def create_data_base_core():
         if ProjectConsts.ConfigDict.get("DataBase_logging") == "True":
@@ -28,7 +29,7 @@ class DataBaseLauncher:
 
     @staticmethod
     def create_metadata():
-        # создаем таблицы
+        # создаем таблиц
         DataBaseObject.metadata.create_all(bind=ProjectConsts.DataBaseEngine)
 
     @staticmethod

@@ -9,10 +9,8 @@ from externalControllers.webServer.main import launch_server_debug, launch_serve
 
 import ProjectConsts
 
-# logger = logging.getLogger()
-from map.MapController import MapController
 
-
+# настраиваем логирование
 def config_logging(logger):
     logger.setLevel(logging.DEBUG)
 
@@ -39,14 +37,8 @@ def config_logging(logger):
                             format="%(name)s - %(levelname)s - %(asctime)s - %(message)s")
     ProjectConsts.InitConfigLogging = True
 
-    # Test messages
-    # logger.debug("This is a harmless debug Message")
-    # logger.info("This is just an information")
-    # logger.warning("It is a Warning. Please make changes")
-    # logger.error("You are trying to divide by zero")
-    # logger.critical("Internet is down")
 
-
+# читаем конфигурацию из файла
 def reading_configuration_from_file(logger):
     logger.info("Чтение конфигурации из файла...")
     config_dict = {}
@@ -59,6 +51,7 @@ def reading_configuration_from_file(logger):
     logger.info("Чтение конфигурации из файла завершено")
 
 
+# точка старта
 if __name__ == "__main__":
     if not ProjectConsts.InitConfigDict:
         reading_configuration_from_file(logging.getLogger())
@@ -66,12 +59,13 @@ if __name__ == "__main__":
     if not ProjectConsts.InitConfigLogging:
         config_logging(logging.getLogger())
 
+    # запускаем БД
     DataBaseLauncher.init_data_base()
 
+    # запускаем ядро
     ProjectConsts.Core = Core()
 
-    #написать запуск модуля распознования команд
-
+    # запускаем сайт
     if ProjectConsts.ConfigDict.get("launchMode") == "debug":
         launch_server_debug()
     else:
