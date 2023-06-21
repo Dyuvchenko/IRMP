@@ -65,6 +65,8 @@ if __name__ == "__main__":
     # запускаем ядро
     ProjectConsts.Core = Core()
 
+    # ProjectConsts.Core.voiceGuidanceController.play_sound("Система успешно запущена, производится запуск сайта.")
+
     # запускаем сайт
     if ProjectConsts.ConfigDict.get("launchMode") == "debug":
         launch_server_debug()

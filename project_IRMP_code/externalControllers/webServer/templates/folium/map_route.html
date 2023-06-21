@@ -1,11 +1,14 @@
 {% include 'base/header.html' %}
 
-<div class="container">
-<!--    <div style="margin: 15px">-->
-        {{ iframe|safe }}
-<!--    </div>-->
+<div style="margin: 15px">
+    {{ iframe|safe }}
     <div style="margin: 15px">
-        <button id="add_route_btn" type="button" class="btn btn-primary">Создать новый маршрут</button>
+        <button id="add_route_btn_point" type="button" class="btn btn-primary"
+                onclick="location.href='{{ url_for('folium_map_add_route') }}';" >Создать новый маршрут по точкам
+        </button>
+        <button id="add_route_btn_borders" type="button" class="btn btn-primary"
+                onclick="location.href='{{ url_for('folium_map_add_route_point') }}';" >Создать новый маршрут по границам
+        </button>
     </div>
 </div>
 

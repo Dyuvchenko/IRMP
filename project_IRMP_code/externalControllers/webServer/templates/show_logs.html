@@ -1,0 +1,13 @@
+{% include 'base/header.html' %}
+
+<div class="container">
+    <h3>Логи платформы</h3>
+    {% for file in log_files %}
+    <div> {{ file }} <button class="btn btn-info btn-sm" id="{{ file }}" name="download_log">Скачать файл</button></div>
+    <br>
+    {% endfor %}
+</div>
+
+
+{% include 'folium/map_scripts.html' %}
+{% include 'base/footer.html' %}

@@ -1,4 +1,4 @@
-launchMode : debug //debug or production # на текущий момент из-за работы с камерами, не работает flask-debug, # т.к. он перезапускает всё и при перезапуске оказывается, что камера уже занята(
+launchMode : production //debug or production # на текущий момент из-за работы с камерами, не работает flask-debug, # т.к. он перезапускает всё и при перезапуске оказывается, что камера уже занята(
 DataBaseLink : sqlite:///db/dataBase/IRMP.db // Ссылка на базу данных
 DataBase_logging : True // логирование работы с базой данных True или False
 update_time_type : sec // какого типа значение в обновлении времени (hour/min/sec)

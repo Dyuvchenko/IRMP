@@ -3,18 +3,22 @@
 <div style="margin: 15px">
     {{ iframe|safe }}
 </div>
+<div class="container">
+    <label class="control-label">Укажите длительность времени патрулирования (в часах).</label>
+    <input type="text" class="form-control" id="time_patrol">
+    <label class="control-label">Сгенерировать маршрут патрулирования
+        внутри территории по указанным угловым точкам.</label>
+</div>
 
 <div class="container text-center">
     <div class="row">
-<!--        <div class="col-6">-->
-            <button id="add_route_btn" type="button" class="btn btn-primary btn-lg">Создать новый маршрут</button>
-<!--        </div>-->
-<!--        <div class="col-6">-->
-            <button id="save_route_btn" type="button" class="btn btn-success btn-lg">Сохранить маршрут</button>
-<!--        </div>-->
-<!--        <div class="col-6">-->
-            <button id="exit_route_btn" type="button" class="btn btn-danger btn-lg">Отмена</button>
-<!--        </div>-->
+        <button id="add_route_btn" type="button" class="btn btn-primary btn-lg">Сгенерировать маршрут</button>
+        <!--        </div>-->
+        <!--        <div class="col-6">-->
+        <button id="exit_route_btn" type="button" class="btn btn-danger btn-lg"
+                onclick="location.href='{{ url_for('folium_map_route') }}';">Отмена
+        </button>
+        <!--        </div>-->
     </div>
 </div>
 

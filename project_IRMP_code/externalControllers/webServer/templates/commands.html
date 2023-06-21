@@ -1,0 +1,37 @@
+{% include 'base/header.html' %}
+
+<div class="container">
+    <h4> Текущая команда</h4>
+    <div>Наименование команды: {{name_command}}</div>
+    <div>Статус выполнения: {{ status_current_instruction }}</div>
+    <button id="stop_current_command" type="button" class="btn btn-danger btn">Остановить выполнение</button>
+    <br>
+    <hr>
+    <h4> Команды </h4>
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Имя команды</th>
+            <!--            <th>Путь к модулю</th>-->
+            <th>Выполнить</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for command in instructions %}
+        <tr>
+            <td>{{ command.name }}</td>
+            <td>
+                <button id="{{ command.name }}" name="activate_command" type="button" class="btn btn-info"
+                        >Выполнить</button>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+
+{% include 'folium/map_scripts.html' %}
+{% include 'base/footer.html' %}

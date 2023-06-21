@@ -4,6 +4,7 @@ import threading
 import traceback
 
 import ProjectConsts
+from externalControllers.VoiceGuidance.VoiceGuidanceController import VoiceGuidanceController
 from map.MapController import MapController
 from instruction.InstructionController import InstructionController
 from datetime import datetime
@@ -34,6 +35,8 @@ class Core:
     """Контроллер инструкций"""
     instructionController: InstructionController = None
 
+    voiceGuidanceController: VoiceGuidanceController = VoiceGuidanceController()
+
     """Текущая инструкция на исполнении"""
     __current_instruction__ = None
 
@@ -43,7 +46,7 @@ class Core:
         ProjectConsts.InstructionController = self.instructionController
         self.__config_disable_modules__()  # настраиваем отключённые модули
         self.__init_modules()  # инициализируем внешние модули
-        self.__map_controller__ = MapController("58.102712, 38.621715")
+        self.__map_controller__ = MapController("58.106712, 38.621715")
 
         base_core_thread = threading.Thread(target=self.main_process)  # запускаем основной процесс core
         base_core_thread.start()
@@ -88,6 +91,8 @@ class Core:
             try:
                 __import__(name_module)  # первичный импорт main файлов модулей
 
+                self.init_instruction_modules(name_module)  # берём команды модулей
+
                 # импортируем функции update из main файлов модулей
                 self.functionsUpdateModule[name_module] = \
                     __import__(name_module, globals(), locals(), ['update'], 0).update
@@ -100,21 +105,32 @@ class Core:
 
         self._logger_.info("Завершена инициализация внешних модулей")
 
+    def init_instruction_modules(self, name_module):
+        instructions_module = None
+        try:
+            instructions_module = __import__(name_module, globals(), locals(), ['update'], 0).getModuleInstructions()
+        except Exception:
+            self._logger_.error("Ошибка получения инструкций модуля модуля:" + name_module)
+
+        if instructions_module != None:
+            self.instructionController.instructionsSet = self.instructionController.instructionsSet \
+                .union(instructions_module)
+
     def main_process(self):
         logging.getLogger().info("main_process в core запущен")
         while True:
-            if not ProjectConsts.emergency_stop: # пока не установлен флаг аварийной остановки
+            if not ProjectConsts.emergency_stop:  # пока не установлен флаг аварийной остановки
                 self.processing_current_instructions()
 
-            if ProjectConsts.stop_system: # пока не установлен флаг остановки системы
+            if ProjectConsts.stop_system:  # пока не установлен флаг остановки системы
                 break
         logging.getLogger().info("main_process в core завершил свою работу")
 
     # выполнение текущей инструкции
     def processing_current_instructions(self):
         self.__current_instruction__ = self.instructionController.get_current_instruction_or_none()
-        if self.__current_instruction__: # если есть инструкция
-            self.__current_instruction__()
+        if self.__current_instruction__:  # если есть инструкция
+            self.__current_instruction__.function()
             self.__current_instruction__ = None
 
     # процесс обновления модулей
@@ -136,7 +152,7 @@ class Core:
         time_pause = int(ProjectConsts.ConfigDict["update_time"]) * multiplier
         while True:
             time_now = Core.time_now_in_second()
-            if time_now - time_pause > update_start_time: # запускаем обновление по таймеру
+            if time_now - time_pause > update_start_time:  # запускаем обновление по таймеру
                 update_start_time = time_now
                 self._logger_.info("Запущено обновление модулей")
                 self.update_module()
@@ -159,14 +175,17 @@ class Core:
                 self._logger_.error(traceback.format_exc())
 
     """Получаем текущее время с переводом в секунды"""
+
     @staticmethod
     def time_now_in_second():
         return datetime.now().time().second + datetime.now().time().minute * 60 + datetime.now().time().hour * 60 * 60
 
     """Получить настройки модулей"""
+
     def get_modules_settings(self):
         return self.__modules_settings__
 
     """Получить отключённые модули"""
+
     def get_disable_modules(self):
         return self.__disable_modules__

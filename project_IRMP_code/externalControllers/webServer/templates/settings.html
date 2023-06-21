@@ -1,6 +1,32 @@
 {% include 'base/header.html' %}
 <div class="container">
+    <h3> Настройка WI-FI сети </h3>
+    <div>
+        <div class="form-group">
+            <label class="control-label">Введите название новой WI-FI сети</label>
+            <input type="text" class="form-control" id="inputWIFISSID">
+        </div>
+        <div class="form-group">
+            <label class="control-label">Введите пароль новой WI-FI сети</label>
+            <input type="text" class="form-control" id="inputWIFIPASSWORD">
+        </div>
+    </div>
+    <button id="button_connect_to_wifi" type="button" class="btn btn-info">
+        Подключиться к WI-FI сети
+    </button>
+    <hr>
+
+    <h3> Обновление системы и модулей </h3>
+    <div>
+        <button type="button" class="btn btn-default" id="update_system">Обновить систему и модули</button>
+    </div>
+    <hr>
+
     <h3> Работа с модулями </h3>
+    <div>
+        <button type="button" class="btn btn-default" id="update_module">Провести поиск установленных модулей</button>
+    </div>
+    <h4> Управление модулями </h4>
     <table class="table table-condensed">
         <thead>
         <tr>
@@ -34,11 +60,15 @@
             {% endif %}
             {% if module_settings.is_disabled %}
             <td>
-                <button id="activate_module" name="{{module_settings.path}}" type="button" class="btn btn-info">Активировать модуль</button>
+                <button id="{{module_settings.path}}_activate" name="activate_module" type="button" class="btn btn-info">
+                    Активировать модуль
+                </button>
             </td>
             {% else %}
             <td>
-                <button id="disable_module" name="{{module_settings.path}}" type="button" class="btn btn-warning">Отключить модуль</button>
+                <button id="{{module_settings.path}}_disable" name="disable_module" type="button" class="btn btn-warning">
+                    Отключить модуль
+                </button>
             </td>
             {% endif %}
         </tr>

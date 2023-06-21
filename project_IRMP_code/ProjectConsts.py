@@ -21,7 +21,7 @@ DataBaseEngine: Engine = None
 
 Core: Core2 = None
 
-InstructionController: InstructionController = None
+instructionController: InstructionController = None
 
 # возможны проблемы с порядком инициализации(
 FlaskServerApp = None

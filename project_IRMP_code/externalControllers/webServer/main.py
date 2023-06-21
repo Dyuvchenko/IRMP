@@ -1,9 +1,10 @@
+import glob
 import logging
 import os.path
 import sys
 from time import sleep
 
-from flask import Flask, render_template, g, request, flash, session, jsonify, Response
+from flask import Flask, render_template, g, request, flash, session, jsonify, Response, send_from_directory
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 from flask_flatpages import FlatPages
 from flask_frozen import Freezer
@@ -11,6 +12,7 @@ import folium
 from sqlalchemy.orm import Session
 
 import ProjectConsts
+from core import WIFIHelper
 from externalControllers.webServer.FlaskHelper import FlaskHelper
 from externalControllers.webServer.FoliumMapHelper import FoliumMapHelper
 from externalControllers.webServer.RoutePointOnMap import RoutePointOnMap
@@ -18,6 +20,8 @@ from externalControllers.webServer.models.UserLogin import UserLogin
 from werkzeug.security import generate_password_hash, check_password_hash
 from externalControllers.webServer.models.Messages.UserMessage import UserMessage
 from externalControllers.webServer.models.Messages.MessageType import MessageType
+
+from instruction.Instruction import Instruction
 
 logger = logging.getLogger()
 
@@ -53,6 +57,26 @@ def load_user(user_id):
     user = UserLogin.fromDB(user_id, g.__db)
     logger.info("Осуществлён вход пользователем: " + user.login)
     return user
+
+
+@app.route("/connect_to_wifi", methods=["POST"])
+@login_required
+def connect_to_wifi():
+    response_data = {}
+    if (request.form['wifi_ssid'] != "") & (request.form['wifi_password'] != ""):
+        if WIFIHelper.WIFIController.is_wifi_available(request.form['wifi_ssid']):
+            WIFIHelper.WIFIController.connect_to(request.form['wifi_ssid'], request.form['wifi_password'])
+            UserMessage("Подключение к WIFI", MessageType.success, "Подключение к WIF выполнено") \
+                .add_from_response_data(response_data)
+            response_data['success'] = True
+        else:
+            UserMessage("Подключение к WIFI", MessageType.error, "Ошибка при подключении к WI-FI") \
+                .add_from_response_data(response_data)
+    else:
+        UserMessage("Подключение к WIFI", MessageType.error,
+                    "Ошибка при подключении к WI-FI. Не указано название WI-FI сети или пароль") \
+            .add_from_response_data(response_data)
+    return jsonify(response_data)
 
 
 @app.route("/logout", methods=["POST"])
@@ -175,6 +199,8 @@ def activate_module():
     response_data = {}
     for name_module, module_settings in ProjectConsts.Core.get_modules_settings().items():
         if module_settings.path == module_path:
+            ProjectConsts.Core.init_instruction_modules(module_settings.name)
+
             module_settings.is_disabled = False
             response_data['success'] = True
 
@@ -207,7 +233,7 @@ def disable_module():
             UserMessage("Деактивация модуля", MessageType.success,
                         "Модуль '" + name_module + "' успешно деактивирован. "
                                                    "Пожалуйста подождите пока изменения вступят в силу."
-                                                   " Как только это произойдёт, сайт автоматически обновится.")\
+                                                   " Как только это произойдёт, сайт автоматически обновится.") \
                 .add_from_response_data(response_data)
             break
     return jsonify(response_data)
@@ -253,6 +279,67 @@ def folium_map_route():
     )
 
 
+@app.route("/adding_a_route", methods=["POST"])
+@login_required
+def adding_a_route():
+    response_data = {}
+    UserMessage("Добавление нового маршрута", MessageType.success,
+                "Маршрут успешно добавлен.").add_from_response_data(response_data)
+    instruction = Instruction()
+    instruction.name = "Движение по маршруту"
+    response_data['success'] = True
+
+    def go_to_points():
+        instruction.status_current_instruction = "Ошибка движения! GPS сигнал потерян."
+
+    instruction.function = go_to_points
+    ProjectConsts.Core.instructionController.add_in_instruction_execution_queue(instruction)
+    return jsonify(response_data)
+
+
+@app.route("/execute_command", methods=["POST"])
+@login_required
+def execute_command():
+    response_data = {}
+
+    command_name = request.form['command_name']
+    instruction = ProjectConsts.Core.instructionController.find_instruction(command_name)
+    ProjectConsts.Core.instructionController.add_in_instruction_execution_queue(instruction)
+
+    UserMessage("Выполнение команды", MessageType.success,
+                "Команда успешно отправлена на выполнение.").add_from_response_data(response_data)
+    response_data['success'] = True
+
+    return jsonify(response_data)
+
+
+@app.route('/download_log/<path:filename>', methods=['GET', 'POST'])
+def download_log(filename):
+    uploads = ProjectConsts.RootDerictory + "logs/"
+    return send_from_directory(directory=uploads, filename=filename)
+
+
+@app.route("/show_logs")
+@login_required
+def show_logs():
+    log_files = [f for f in glob.glob("logs/*.log")]
+    log_files_name = []
+    for file in log_files:
+        log_files_name.append(file.replace("logs\\", ""))
+    return base_render_template("show_logs.html", log_files=log_files_name)
+
+
+@app.route("/commands")
+@login_required
+def commands():
+    instruction_controller = ProjectConsts.Core.instructionController
+    return base_render_template("commands.html",
+                                name_command=instruction_controller.current_instruction.name,
+                                status_current_instruction=instruction_controller.current_instruction.status_current_instruction,
+                                instructions=instruction_controller.instructionsSet)
+
+
+# по перимитру
 @app.route("/map_add_route")
 @login_required
 def folium_map_add_route():
@@ -261,6 +348,19 @@ def folium_map_add_route():
     iframe = f_map.get_root()._repr_html_()
     return base_render_template(
         "folium/map_add_route.html",
+        iframe=iframe
+    )
+
+
+# по точкам
+@app.route("/map_add_route_point")
+@login_required
+def folium_map_add_route_point():
+    f_map = FoliumMapHelper.create_folium_map()
+    f_map.add_child(RoutePointOnMap())
+    iframe = f_map.get_root()._repr_html_()
+    return base_render_template(
+        "folium/map_add_route_point.html",
         iframe=iframe
     )
 
