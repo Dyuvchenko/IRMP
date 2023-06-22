@@ -5,6 +5,7 @@ from time import sleep
 import cv2
 from flask import Blueprint, url_for, Response, render_template, request
 from flask.json import jsonify
+from flask_login import login_required
 
 import ProjectConsts
 import additionalModules.modules.patrolling.main
@@ -28,51 +29,39 @@ def base_render_template(template_name_or_list, **context):
     return flaskHelper.base_render_template(template_name_or_list, **context)
 
 
+text_for_play = ""
+
+
+def set_text(text):
+    global text_for_play
+    text_for_play = text
+
+
+def play_text():
+    global text_for_play
+    if text_for_play == "":
+        return
+    ProjectConsts.Core.voiceGuidanceController.play_sound(text_for_play)
+
+
 @annunciatior.route("/index", methods=["GET"])
 @annunciatior.route('/')
+@login_required
 def annunciatior_index():
-    return base_render_template("annunciatior.html")
+    return base_render_template("annuciatior.html")
 
 
+@annunciatior.route("/update_message", methods=["POST"])
+def update_message():
+    response_data = {}
 
-# @annunciatior.route("/take_photo", methods=["POST"])
-# def take_photo():
-#     response_data = {}
-#     take_photo = request.form["take_photo"]
-#     name_people = request.form["name_people"]
-#
-#     people_path = modulePath + "dataset\\" + name_people
-#     if take_photo != "":
-#         if name_people != "":
-#             # если нету такого пользователя, то создаём его
-#             if not os.path.exists(people_path):
-#                 os.mkdir(people_path)
-#             # считаем сколько есть
-#             count_img = len(glob(people_path + '\\image' + '*.jpg'))
-#             response_data["count_photo"] = 9 - count_img
-#
-#             # делаем фото)
-#             img_name = people_path + "\\image_{}.jpg".format(count_img)
-#             cv2.imwrite(img_name, ProjectConsts.CamController.camera.get_frame(_bytes=False))
-#             count_img += 1
-#
-#             if count_img > 9:
-#                 response_data["photo_success"] = True
-#                 train_model()
-#                 UserMessage("Обучение распознавания новому человеку завершено!", MessageType.success,
-#                             "Обучение распознавания новому человеку завершено!") \
-#                     .add_from_response_data(response_data)
-#             else:
-#                 UserMessage("Фотография успешно сделана", MessageType.success, "Фотография успешно сделана") \
-#                     .add_from_response_data(response_data)
-#
-#         else:
-#             UserMessage("Ошибка добавления пользователя", MessageType.error, "Не указано ФИО нового человека") \
-#                 .add_from_response_data(response_data)
-#
-#     return jsonify(response_data)
-
-
+    response_data['success'] = True
+    new_message = request.form['new_message']
+    global text_for_play
+    text_for_play = new_message
+    UserMessage("Обновление оповещения", MessageType.success,
+                "Обновление оповещения выполнено успешно.").add_from_response_data(response_data)
+    return jsonify(response_data)
 
 
 def get_module_name():

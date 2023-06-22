@@ -2,15 +2,18 @@ import logging
 
 # подключаем файл с "blueprint"
 import ProjectConsts
+import socket
 import additionalModules.modules.annunciator.annunciatorBlueperint
 from additionalModules.modules.annunciator.annunciatorBlueperint import get_module_name
 from additionalModules.modules.annunciator.annunciatorBlueperint import get_module_url_path
 from core.ModuleSettings import ModuleSettings
 from instruction.Instruction import Instruction
 
+from additionalModules.modules.annunciator.annunciatorBlueperint import play_text
+
 
 def update(emergency_stop):
-    pass
+    play_text()
 
 
 def checking_ability_to_use_module():
@@ -33,6 +36,24 @@ def sound_check():
 
 
 instruction.function = sound_check
+
+instructions.add(instruction)
+
+
+
+# поиск своего ip)
+instruction = Instruction()
+instruction.name = "Адрес сайта"
+
+
+def ip_check():
+    message = "Ip адрес платформы: " + socket.gethostbyname(socket.gethostname()) + ". Порт: 8000"
+    ProjectConsts.Core.voiceGuidanceController.play_sound(message)
+
+    instruction.status_current_instruction = "Команда успешно выполнена"
+
+
+instruction.function = ip_check
 
 instructions.add(instruction)
 

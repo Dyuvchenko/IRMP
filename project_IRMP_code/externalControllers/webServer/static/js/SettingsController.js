@@ -77,3 +77,40 @@ if (document.querySelector("#button_connect_to_wifi") != null) {
         return false;
     }
 }
+
+if (document.querySelector("#update_module") != null) {
+    let button_update_module = document.querySelector("#update_module");
+    button_update_module.onclick = function() {
+        console.log("Обновление статуса модулей");
+        button_update_module.disabled = true;
+
+         function update_module_timer() {
+             button_update_module.disabled = false;
+             location.reload();
+         }
+         setTimeout(update_module_timer, 5000);
+
+        return false;
+    }
+}
+
+if (document.querySelector("#update_system") != null) {
+    let button_update_system = document.querySelector("#update_system");
+    button_update_system.onclick = function() {
+        console.log("Попытка обновления системы");
+        button_update_system.disabled = true;
+        let serverConnection = new ServerConnection(ServerConnection.methodType.POST, "/update_system");
+        serverConnection.setOnLoad((data) => {
+            button_update_system.disabled = false;
+            return false;
+        });
+
+         function activate_button_update_system() {
+             button_update_system.disabled = false;
+         }
+         setTimeout(activate_button_update_system, 5000);
+        // Послать запрос
+        serverConnection.send();
+        return false;
+    }
+}

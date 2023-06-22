@@ -11,11 +11,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}"
+          crossorigin="anonymous">
+
+    <!-- Подключаем файл для создания enum -->
+    <script src="{{ url_for('static', filename='js/enum.js') }}" crossorigin="anonymous"></script>
 
     <!-- jQuery -->
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
+    <!-- Подключаем класс, который будет служить базовым отправителем запросов, и если что будет красиво выдавать ошибки пользователю -->
+    <script src="{{ url_for('static', filename='js/ServerConnection.js') }}" crossorigin="anonymous"></script>
 </head>
 <body>

@@ -53,6 +53,9 @@ def reading_configuration_from_file(logger):
 
 # точка старта
 if __name__ == "__main__":
+
+    # os.chdir("/home/modex/Desktop/IRMP/project_IRMP_code/")
+
     if not ProjectConsts.InitConfigDict:
         reading_configuration_from_file(logging.getLogger())
 

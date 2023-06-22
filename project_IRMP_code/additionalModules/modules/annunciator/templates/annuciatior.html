@@ -1,0 +1,45 @@
+{% include 'base/header.html' %}
+
+
+<div class="container text-center">
+    <!--    <h4> Видео с камеры </h4>-->
+    <div>Данный модуль предназначен для постоянного воспроизведения заданного текста.</div>
+
+    <h3> Управление оповещениями</h3>
+    <div>
+        <div class="form-group">
+            <label class="control-label">Введите оповещение</label>
+            <input type="text" class="form-control" id="input_message">
+        </div>
+    </div>
+    <button id="button_update_message" type="button" class="btn btn-info">
+        Обновить оповещение
+    </button>
+    <script>
+        if (document.querySelector("#button_update_message") != null) {
+            let button_update_message = document.querySelector("#button_update_message");
+            button_update_message.onclick = function() {
+                console.log("Изменение оповещения");
+                button_update_message.disabled = true;
+                let serverConnection = new ServerConnection(ServerConnection.methodType.POST, "/annunciatior/update_message");
+                serverConnection.setOnLoad((data) => {
+                    if (data.success) {
+                        button_update_message.disabled = false;
+                    }
+                    button_update_message.disabled = false;
+                    return false;
+                });
+                serverConnection.data.append('new_message', document.querySelector("#input_message").value);
+                serverConnection.send();
+                return false;
+            }
+        }
+
+    </script>
+
+    <p class="text-center">Разработчик <a class="text-reset fw-bold" href="#">: Ювченко Давид</a>
+        Телефон для связи: * *** *** ** ** </p>
+</div>
+
+{% include 'folium/map_scripts.html' %}
+{% include 'base/footer.html' %}

@@ -186,6 +186,7 @@ def test():
 
 
 @app.route("/settings", methods=["GET"])
+@login_required
 def settings():
     return base_render_template(
         "settings.html",
@@ -207,6 +208,8 @@ def activate_module():
             # читаем файл и записываем новый, обновлённый конфиг файл
             update_config_disable_modules_file(activate_module_path=module_path, disable_module_path=None)
             # записываем обновлённые отключённые модули
+
+            ProjectConsts.Core.get_disable_modules().remove(module_path)
 
             UserMessage("Активация модуля", MessageType.success,
                         "Модуль '" + name_module +
@@ -230,12 +233,43 @@ def disable_module():
             update_config_disable_modules_file(activate_module_path=None, disable_module_path=module_path)
             # записываем обновлённые отключённые модули
 
+            ProjectConsts.Core.get_disable_modules().add(module_path)
+
             UserMessage("Деактивация модуля", MessageType.success,
                         "Модуль '" + name_module + "' успешно деактивирован. "
                                                    "Пожалуйста подождите пока изменения вступят в силу."
                                                    " Как только это произойдёт, сайт автоматически обновится.") \
                 .add_from_response_data(response_data)
             break
+    return jsonify(response_data)
+
+
+@app.route("/emergency_stop", methods=["POST"])
+def emergency_stop():
+    response_data = {}
+    ProjectConsts.Core.voiceGuidanceController.play_sound("Выполняется аварийная остановка")
+    UserMessage("Аварийная остановка", MessageType.info,
+                "Аварийная остановка выполняется") \
+        .add_from_response_data(response_data)
+    return jsonify(response_data)
+
+
+@app.route("/stop_current_command", methods=["POST"])
+def stop_current_command():
+    response_data = {}
+    ProjectConsts.Core.voiceGuidanceController.play_sound("Выполняется остановка выполнения текущей команды")
+    UserMessage("Остановка выполнения команды", MessageType.info,
+                "Выполняется остановка выполнения текущей команды") \
+        .add_from_response_data(response_data)
+    return jsonify(response_data)
+
+
+@app.route("/update_system", methods=["POST"])
+def update_system():
+    response_data = {}
+    UserMessage("Обновление системы", MessageType.error,
+                "Ошибка получения данных от Git") \
+        .add_from_response_data(response_data)
     return jsonify(response_data)
 
 
@@ -295,6 +329,14 @@ def adding_a_route():
     instruction.function = go_to_points
     ProjectConsts.Core.instructionController.add_in_instruction_execution_queue(instruction)
     return jsonify(response_data)
+
+
+@app.route("/manual_control")
+@login_required
+def manual_control():
+    return base_render_template(
+        "manual_control.html"
+    )
 
 
 @app.route("/execute_command", methods=["POST"])

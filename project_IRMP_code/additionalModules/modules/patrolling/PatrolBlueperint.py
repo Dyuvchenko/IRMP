@@ -5,6 +5,7 @@ from time import sleep
 import cv2
 from flask import Blueprint, url_for, Response, render_template, request
 from flask.json import jsonify
+from flask_login import login_required
 
 import ProjectConsts
 import additionalModules.modules.patrolling.main
@@ -30,16 +31,19 @@ def base_render_template(template_name_or_list, **context):
 
 @patrol.route("/index", methods=["GET"])
 @patrol.route('/')
+@login_required
 def patrol_index():
     return base_render_template("patrol.html")
 
 
 @patrol.route('/people')
+@login_required
 def patrol_people():
     return base_render_template("facial_recognition.html")
 
 
 @patrol.route("/listeners_patrolling")
+@login_required
 def listeners_patrolling():
     return render_template("listeners_patrolling.js")
 

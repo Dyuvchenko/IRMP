@@ -25,12 +25,12 @@ class FoliumMapHelper:
 
     @staticmethod
     def delete_folium_info(folium_map):
-        folium_map.get_root().html.add_child(folium.JavascriptLink("static\\js\\folium\\delete_base_folium_info.js"))
+        folium_map.get_root().html.add_child(folium.JavascriptLink("static/js/folium/delete_base_folium_info.js"))
 
     @staticmethod
     def add_folium_helper(folium_map):
         templateLoader = jinja2.FileSystemLoader(
-            searchpath=ProjectConsts.RootDerictory + "externalControllers\\webServer\\static\\js\\folium\\")
+            searchpath=ProjectConsts.RootDerictory + "externalControllers/webServer/static/js/folium/")
         templateEnv = jinja2.Environment(loader=templateLoader)
         TEMPLATE_FILE = "folium_helper.js"
         template = templateEnv.get_template(TEMPLATE_FILE)

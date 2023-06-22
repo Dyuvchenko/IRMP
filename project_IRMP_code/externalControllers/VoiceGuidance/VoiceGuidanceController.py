@@ -61,7 +61,10 @@ class VoiceGuidanceController:
     def processing_of_recognition_results(self, recognized_text):
         if recognized_text != "":
             self._logger_.info("Распознанный текст: " + recognized_text)
-            pass
+            instruction = ProjectConsts.Core.instructionController.find_instruction(recognized_text)
+            if instruction != None:
+                ProjectConsts.Core.instructionController.add_in_instruction_execution_queue(instruction)
+
 
     def user_verification(self):
         pass

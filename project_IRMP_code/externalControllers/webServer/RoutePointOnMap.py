@@ -18,7 +18,7 @@ class RoutePointOnMap(MacroElement):
     @staticmethod
     def get_template():
         templateLoader = jinja2.FileSystemLoader(
-            searchpath=ProjectConsts.RootDerictory + "externalControllers\\webServer\\static\\js\\folium\\")
+            searchpath=ProjectConsts.RootDerictory + "externalControllers/webServer/static/js/folium/")
         templateEnv = jinja2.Environment(loader=templateLoader)
         TEMPLATE_FILE = "add_road_marker.js"
         template = templateEnv.get_template(TEMPLATE_FILE)

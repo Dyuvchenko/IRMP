@@ -4,7 +4,7 @@ from sqlalchemy.engine.base import Engine
 from core.cameras.camController import CamerasController
 from instruction import InstructionController
 
-RootDerictory = os.path.dirname(os.path.abspath(__file__)) + "\\"
+RootDerictory = os.path.dirname(os.path.abspath(__file__)) + "/"
 ConfigDict = {
     "launchMode": "production",
     "DataBase_logging": "False",

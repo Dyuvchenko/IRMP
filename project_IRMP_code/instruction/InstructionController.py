@@ -32,7 +32,7 @@ class InstructionController:
 
     def find_instruction(self, name_instruction):
         for instruction in self.instructionsSet:
-            if instruction.name == name_instruction:
+            if instruction.name.lower() == name_instruction.lower():
                 return instruction
 
     def add_instruction(self, name, function):

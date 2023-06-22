@@ -20,7 +20,7 @@
                         <li><a href="{{ url_for('folium_map_info') }}">Просмотр Карты</a></li>
                         <li><a href="{{ url_for('folium_map_route') }}">Управление маршрутами</a></li>
                         <li><a href="{{ url_for('commands') }}">Управление командами</a></li>
-                        <li><a href="{{ url_for('folium_map_route') }}">Ручное управление</a></li>
+                        <li><a href="{{ url_for('manual_control') }}">Ручное управление</a></li>
                         <li><a href="{{ url_for('show_logs') }}">Просмотр логов</a></li>
 <!--                        <li class="divider"></li>-->
 <!--                        <li><a href="#">Отдельная ссылка</a></li>-->
@@ -39,7 +39,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <button class="btn btn-danger" data-dismiss="modal" style="margin:7px">Аварийная остановка</button>
+                <button class="btn btn-danger" data-dismiss="modal" style="margin:7px"
+                id="emergency_stop">Аварийная остановка</button>
                 {% include 'base/loginRegistrationProfile.html' %}
             </ul>
         </div>

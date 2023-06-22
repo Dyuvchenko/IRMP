@@ -7,6 +7,8 @@ import imutils
 import pickle
 import time
 import cv2
+
+import ProjectConsts
 from core.cameras.camController import CamerasController
 
 camera = CamerasController.camera
@@ -18,6 +20,8 @@ encodingsP = "additionalModules/modules/patrolling/encodings.pickle"
 # cascade for face detection
 print("[INFO] loading encodings + face detector...")
 data = pickle.loads(open(encodingsP, "rb").read())
+
+kol_vo_unknow = 0
 
 
 def show_facial_recognition():
@@ -64,6 +68,20 @@ def show_facial_recognition():
             # If someone in your dataset is identified, print their name on the screen
             if current_name != name:
                 current_name = name
+                global kol_vo_unknow
+                if name == "Unknown":
+                    if kol_vo_unknow > 3:
+                        ProjectConsts.Core.voiceGuidanceController.play_sound(
+                            "Внимание! Обнаружен  посторонний человек! Срочно покиньте территорию!")
+                        ProjectConsts.Core.voiceGuidanceController.play_sound(
+                            "Внимание! Обнаружен  посторонний человек! Срочно покиньте территорию!")
+                        ProjectConsts.Core.voiceGuidanceController.play_sound(
+                            "Внимание! Обнаружен  посторонний человек! Срочно покиньте территорию!")
+
+                    kol_vo_unknow += 1
+                    ProjectConsts.Core.voiceGuidanceController.play_sound(
+                        "Внимание! Обнаружен посторонний! Остановитесь и посмотрите на меня!")
+                kol_vo_unknow = 0
                 print(current_name)
 
         # update the list of names
