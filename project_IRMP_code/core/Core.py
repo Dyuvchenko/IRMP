@@ -69,7 +69,7 @@ class Core:
         self._logger_.info("Запуск модулей:" + str(main_py_modules))
         module_settings: ModuleSettings = None  # сокращённое имя модуля (нормальное имя)
         for main_modul in main_py_modules:
-            name_module = main_modul.replace("\\", ".") \
+            name_module = main_modul.replace("/", ".") \
                 .replace(".py", "")  # ну даже не имя модуля, а скорее путь к main файлу
             # получаем сокращённое имя модуля из main файлов модуля
             try:
